@@ -5,49 +5,7 @@ from AllCompoent.GraghMatch import *
 from AllCompoent.interface import *
 from AllCompoent.relink import *
 from AllCompoent.Cluster import *
-
 from tools.settings import *
-
-
-
-
-
-# def MHTReduction(froest,frame):
-#     ListCanBeReduced = []
-#     temp_froest = []
-#     for branch in froest:
-#           if(len(branch.targets) < int(frame) + 1):
-#             ListCanBeReduced.append(branch)
-#     for branch in ListCanBeReduced:
-#         ListTobeReducedWithBranch = []
-#         list1 = [] 
-#         for target in branch.targets:
-#             list1.append(target.frame)
-
-#         for Qbranch in  ListCanBeReduced:
-#             list2 = []
-#             for target in Qbranch.targets:
-#                 list2.append(target.frame)
-#             if(list(set(list1) & set(list2)) == []):
-#                  ListTobeReducedWithBranch.append()
-        
-#         for i in range(0,len(ListTobeReducedWithBranch)):
-            
-#             RHList = deepcopy(branch.targets)
-#             RHList.extend(ListTobeReducedWithBranch[i].targets)
-#             if
-#             else:
-#                 temp_froest.append
-             
-
-
-
-
-
-
-
-
-
 
 
 #核心函数
@@ -89,21 +47,12 @@ def BuildTheFroestWithGraphMatchV4(all_data,Seqlist):
                 # print(graphMatch)
                 if(len(graphMatch) == 0):
                      print('-------------------------iou---------------------------------------------------')
-                     print('-------------------------iou---------------------------------------------------')
-                     print('-------------------------iou---------------------------------------------------')
-                     print('-------------------------iou---------------------------------------------------')
-                     print('-------------------------iou---------------------------------------------------')
-                     print('-------------------------iou---------------------------------------------------')
-                     print('-------------------------iou---------------------------------------------------')
-                     
-                # ProducePairRes(frame, frame-1, graphMatch, all_data, c, Seqlist)
-                # ProducePairResV2(frame, frame-1, graphMatch, all_data, c, Seqlist)
+                        
                 graphMatchList_temp += graphMatch
 
 
               
             graphMatchList_temp = list(set(graphMatchList_temp))
-
 
             Matched_Current_index = [y for x, y in graphMatchList_temp]
                 
@@ -177,13 +126,11 @@ def BuildTheFroestWithGraphMatchV4(all_data,Seqlist):
 
                 trajectory_forest_temp =  deepcopy(trajectory_forest_new)
                 
-                # for everybranch in TotalUnMatchFroest:
-                #     trajectory_forest_temp.append(everybranch)
+
         
 
 
                 RELinkFroest1,ClusterFroset2 = ReLinkByAFLinkWithlessCalculate4(trajectory_forest_temp,TotalUnMatchFroest,frame)
-                # VisID(RELinkFroest1, frame)
 
                 RELinkFroest1List = []
                 for branch in ClusterFroset2:
@@ -203,16 +150,6 @@ def BuildTheFroestWithGraphMatchV4(all_data,Seqlist):
 
 
                 TotalUnMatchTargetsList = list(filter(lambda branch: frame - branch['frame'] <= 5, TotalUnMatchTargetsListList2))
-
-        #         for branch in TotalUnMatchFroest:
-        #             if(len(branch.targets)>1):
-        #                 trajectory_forest_new.append(branch)
-                
-        #         trajectory_forest_new.extend(RELinkFroest1)
-        #         VisID(trajectory_forest_new, frame)
-                
-          
-
         
         trajectory_forest = deepcopy(trajectory_forest_new)
         
@@ -227,26 +164,7 @@ def BuildTheFroestWithGraphMatchV4(all_data,Seqlist):
             print('【MWIS】', end_time-start_time)
             VisID(trajectory_forest, frame ,frame)
             print("-----------------------------------------------------------")
-        
-        
-            # trajectory_forest_temp2 = []
-            # for branch in trajectory_forest:
-            #             if(len(branch.targets) < int(frame) + 1):
-            #                 trajectory_forest_temp2.append(branch)
-                    
-            # RELinkFroest2 = ReLinkByAFLinkWithlessCalculate(trajectory_forest_temp2,trajectory_forest_temp2)
-            # trajectory_forest.extend(RELinkFroest2)
-            # VisID(trajectory_forest, frame)
-            # collision_set = GenerateCollision(trajectory_forest)
-            # trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
-            # collision_set = []
-            # VisID(trajectory_forest, frame)
-
-
-
-    # VisID(trajectory_forest, frame)
-    # VisID(AllTracker, frame)
-    
+            
     collision_set = GenerateCollision(trajectory_forest)
     trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
 
@@ -405,13 +323,9 @@ def ClusterCompoent(TotalUnMatchTargetsList,trajectory_forest_new,frame):
 
 
                 TotalUnMatchTargetsList = list(filter(lambda branch: frame - branch['frame'] <= 5, TotalUnMatchTargetsListList2))
-                # TotalUnMatchTargetsList = []
-        #         for branch in TotalUnMatchFroest:
-        #             if(len(branch.targets)>1):
-        #                 trajectory_forest_new.append(branch)
+
                 
                 trajectory_forest_new.extend(RELinkFroest1)
-                # VisID(trajectory_forest_new, frame) 
         
                 return  trajectory_forest_new, TotalUnMatchTargetsList
      
@@ -424,14 +338,7 @@ def MWISCompoent(trajectory_forest,frame):
         collision_set = GenerateCollision(trajectory_forest)
         trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
         collision_set = []
-        # end_time = time.time()
-        # print('【MWIS】', end_time-start_time)
-        # VisID(trajectory_forest, frame ,frame)
-        # print("-----------------------------------------------------------")
 
-
-
-        # MHTReduction(trajectory_forest, frame)
 
         for i in range(0,3):
             trajectory_forest_temp2 = []
@@ -540,22 +447,10 @@ def BuildTheFroestWithGraphMatchV5(all_data,Seqlist):
             
             
     #--------------------------------------------------新建树---------------------------------------------------           
-
-            # if(len(TotalUnMatchTargetsList) != 0):
-            #     if(TotalUnMatchTargetsList[-1]["frame"] - TotalUnMatchTargetsList[0]["frame"] >= 5):
-            #         trajectory_forest_new, TotalUnMatchTargetsList = ClusterCompoent(TotalUnMatchTargetsList,trajectory_forest_new,frame)
-            #         VisID(trajectory_forest_new, frame ,frame)
-            #         trajectory_forest_new = MWISCompoentV2(trajectory_forest_new,frame)
-            #         VisID(trajectory_forest_new, frame ,frame)
-            #         TotalUnMatchTargetsList = []
         
     #--------------------------------------------------聚类+重联------------------------------------------------ 
             
             trajectory_forest =deepcopy(trajectory_forest_new)
-            
-            # if len(trajectory_forest) > config["BRANCH_COUNT_THRESHOLD"]: 
-            #     trajectory_forest = MWISCompoent(trajectory_forest,frame)
-            #     VisID(trajectory_forest, frame ,frame)
 
             if len(trajectory_forest) > config["BRANCH_COUNT_THRESHOLD"]: 
                 trajectory_forest = MWISCompoentV2(trajectory_forest,frame)
@@ -744,107 +639,7 @@ def ReLinkByAFLinkWithlessCalculate4(MHTaddCluster, Cluster, frame):
     return forest,ClusterFroset2
                                      
 
-def CalculateIOUV2(all_data):
-    trajectory_forest = []
-    collision_set = []
-
-    for data in all_data:
-        frame = data["frame"]
-        targets = data["targets"]
-
-        trajectory_forest_new = deepcopy(trajectory_forest)
-
-
-        for trajectory_index, trajectory_branch in enumerate(trajectory_forest):
-            for target_index, target in enumerate(targets):
-                #帧数间隔逻辑
-                if target.frame - trajectory_branch.targets[-1].frame > config["MAX_FRAME_GAP"]:
-                    continue
-                if abs(target.x - trajectory_branch.targets[-1].x) >(target.width + trajectory_branch.targets[-1].width) * 1.0 / 2 * config["MAX_DIATANCE_GAP"]:
-                    continue
-                if abs(target.y - trajectory_branch.targets[-1].y) >(target.height + trajectory_branch.targets[-1].height) * 1.0 / 2 * config["MAX_DIATANCE_GAP"]:
-                    continue
-                if target.gtid !=  trajectory_branch.targets[-1].gtid :
-                    continue
-                if(calculate_iou(target.bbox,trajectory_branch.targets[-1].bbox) < 0.35):
-                    continue
-                #trajectory_branch.targets[-1]branch的最后一帧
-                #target是待匹配的第一帧
-
-                # GraphinBranch=regenreategraph(trajectory_forest)
-
-
-
-                # if similarity_matrix[trajectory_index][target_index] > config["APPEARANCE_SIMILARITY_THRESHOLD"]:
-                branch = deepcopy(trajectory_branch)
-                branch.targets.append(target)
-                branch.branch_id = GetBranchID()
-                trajectory_forest_new.append(branch)
-
-
-        for target in targets:
-            trajectory_branch = Trajectory(target, GetBranchID())
-            trajectory_forest_new.append(trajectory_branch)
-
-        trajectory_forest = deepcopy(trajectory_forest_new)
-
-
-
-        for index,branch in enumerate(trajectory_forest):
-            collision = list(filter(lambda b: b.targets[-1].sid == branch.targets[-1].sid or b.targets[0].sid == branch.targets[0].sid, trajectory_forest))
-            collision_pairs = list(itertools.combinations(collision, 2))
-            collision_set = collision_set + collision_pairs
-
-        collision_set = GenerateCollision(trajectory_forest)
-
-        if len(trajectory_forest) > config["BRANCH_COUNT_THRESHOLD"]:
-            trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
-            collision_set = []
-            # VisID(trajectory_forest, frame,frame)
-            for i in range(0,1):
-                trajectory_forest_temp2 = []
-                for branch in trajectory_forest:
-                            if(len(branch.targets) < int(frame) + 1):
-                                trajectory_forest_temp2.append(branch)
-                    
-                RELinkFroest2 ,_  = ReLinkByAFLinkWithlessCalculate4(trajectory_forest_temp2,trajectory_forest_temp2,frame)
-
-                trajectory_forest.extend(RELinkFroest2)
-                # VisID(trajectory_forest, frame)
-                collision_set = GenerateCollision(trajectory_forest)
-                trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
-                collision_set = []
-
-
-    # VisID(trajectory_forest, frame)
-    # VisID(AllTracker, frame)
-    for index,branch in enumerate(trajectory_forest):
-            collision = list(filter(lambda b: b.targets[-1].sid == branch.targets[-1].sid or b.targets[0].sid == branch.targets[0].sid, trajectory_forest))
-            collision_pairs = list(itertools.combinations(collision, 2))
-            collision_set = collision_set + collision_pairs
-    
-    collision_set = GenerateCollision(trajectory_forest)
-    trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
-    for i in range(0,1):
-        trajectory_forest_temp2 = []
-        for branch in trajectory_forest:
-                    if(len(branch.targets) < int(frame) + 1):
-                        trajectory_forest_temp2.append(branch)
-            
-        RELinkFroest2 ,_  = ReLinkByAFLinkWithlessCalculate3(trajectory_forest_temp2,trajectory_forest_temp2,frame)
-
-        trajectory_forest.extend(RELinkFroest2)
-        # VisID(trajectory_forest, frame)
-        collision_set = GenerateCollision(trajectory_forest)
-        trajectory_forest = max_weight_independent_set_lp(trajectory_forest, collision_set, frame)
-        collision_set = []
-    VisID(trajectory_forest, frame,frame)
-
-    return trajectory_forest    
-
-
-
-def visualizeGMOTWithPath(final_trajectory, all_data_DJI, ListPicture2, VISUALPATH):
+  def visualizeGMOTWithPath(final_trajectory, all_data_DJI, ListPicture2, VISUALPATH):
     FrameOriginzation={}
     for frame in range(int(all_data_DJI[0]["frame"]),int(all_data_DJI[-1]["frame"]+1)):
         FrameOriginzation[frame] = []
@@ -941,14 +736,8 @@ def SavetheResultWithPath(final_trajectory, RESpath):
 
 #MHT
 def MHT(all_data, ListPicture2, VISUALPATH, RESpath, seqList):
-    # 
-    # trajectory_forest = BuildTheFroestWithGraphMatchV4(all_data,seqList)
-    # 
-    trajectory_forest = BuildTheFroestWithGraphMatchV5(all_data,seqList)
-    # 
-    # trajectory_forest = CalculateIOU(all_data)
 
-    # trajectory_forest = CalculateIOUV2(all_data)
+    trajectory_forest = BuildTheFroestWithGraphMatchV5(all_data,seqList)
 
     final_trajectory = FindGlobalOptimized(trajectory_forest, all_data)
     visualizeGMOTWithPath(final_trajectory, all_data, ListPicture2, VISUALPATH)
@@ -1075,30 +864,6 @@ def AllPathDetVis():
     return ListLabel, ListCSV, ListPicture2,visualpath,txtRES
 
 
-def AllPathDetVis2():
-    ListLabel = read_all_files_in_directory('D:/PaperForReId/GMOT40/GMOT40/track_label')
-
-    ListPicture2 = []
-    visualpath = []
-    ListCSV = []
-    txtRES = []
-    for EveryPath in ListLabel:
-        name = Path(EveryPath).stem
-        EveryPath = 'D:\\PaperForReId\\GMOT40\\GMOT40\\GenericMOT_JPEG_Sequence\\' + name + "\\img1\\"
-        ListPicture2.append(EveryPath)
-        
-        EveryPath2 = 'D:\\PaperForReId\\GMOT40\\GMOT40\\TempCSV\\' + name  + ".csv"
-        ListCSV.append(EveryPath2)
-
-        EveryPath3 = 'D:\\PaperForReId\\AllVisRes\\gt\\MHT_Graph_Relink\\' + name  + "/"
-        visualpath.append(EveryPath3)
-        os.makedirs(EveryPath3, exist_ok=True)
-        
-        EveryPath4 = 'D:\\PaperForReId\AllVisRes\\gt\\MHT_Graph_Relink' + "/" + name + ".txt"
-        txtRES.append(EveryPath4)
-
-
-    return ListLabel, ListCSV, ListPicture2,visualpath,txtRES
 
 def list_directories(directory):
     List = []
@@ -1112,11 +877,11 @@ def list_directories(directory):
 #主函数
 if __name__ == '__main__':
 
-    AllList =list_directories('D:/PaperForReId/GMOT40/GMOT40/GenericMOT_JPEG_Sequence/')
+    AllList =list_directories('')
 
     for i in range(39,40):
         ListLabel, ListCSV, ListPicture2, VISUALlist, txtRES = AllPathDetVis2()
-        PicPath = 'D:/PaperForReId/GMOT40/GMOT40/GenericMOT_JPEG_Sequence/'+ AllList[i] + '/img1/'
+        PicPath = ''
         # PrepareGMOTdataWithPath(ListLabel[i], ListCSV[i])
         
         all_data_GMOT = ReadGMOTdataWithSate(ListCSV[i],PicPath)
